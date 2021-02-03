@@ -1,0 +1,22 @@
+﻿using Bussiness.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
+using System;
+
+namespace ConsoleUI
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+
+            foreach (var product in productManager.GetAllByCategoryId(2))
+            {
+                Console.WriteLine(product.ProductName);
+            }
+
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
