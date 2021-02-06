@@ -1,6 +1,7 @@
 ﻿using Bussiness.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,10 +29,13 @@ namespace Bussiness.Concrete
         {
             return _productDal.GelAll(p => p.CategoryId == id);
         }
-
         public List<Product> GetByUnitPrice(decimal min, decimal max)
         {
             return _productDal.GelAll(p=>p.UnitPrice>=min && p.UnitPrice<=max);
+        }
+        public List<ProductDetailDto> GetProductDetailDtos()
+        {
+            return _productDal.GetProductDetails();
         }
     }
 }
