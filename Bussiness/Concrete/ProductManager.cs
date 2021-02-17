@@ -39,7 +39,7 @@ namespace Bussiness.Concrete
             //is kodlari
             //Yetkisi var mi?
 
-            if (DateTime.Now.Hour==00)
+            if (DateTime.Now.Hour == 23)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
