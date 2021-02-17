@@ -21,6 +21,9 @@ namespace Bussiness.Concrete
 
         public IResult Add(Product product)
         {
+            //business codes
+            //validation
+
             if (product.ProductName.Length<2)
             {
                 //magic strings
