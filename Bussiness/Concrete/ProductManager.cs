@@ -2,7 +2,9 @@
 using Bussiness.BusinessAspects.Autofac;
 using Bussiness.Constants;
 using Bussiness.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Caching;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Busines;
 using Core.Utilities.Results;
@@ -32,6 +34,7 @@ namespace Bussiness.Concrete
 
         [SecuredOperation("product.add,admin")]
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
             //business codes
@@ -53,7 +56,7 @@ namespace Bussiness.Concrete
              return new SuccessResult(Messages.ProductAdded);
           
         }
-
+        [CacheAspect]
         public IDataResult<List<Product>> GetAll()
         {
             //is kodlari
@@ -72,6 +75,7 @@ namespace Bussiness.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GelAll(p => p.CategoryId == id));
         }
 
+        [CacheAspect]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
@@ -88,6 +92,7 @@ namespace Bussiness.Concrete
         }
 
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(Product product)
         {
 
