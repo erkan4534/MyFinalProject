@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -29,8 +30,11 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-             //Swagger
-             //Dependency chain --
+            //Swagger
+            //Dependency chain --
+
+            Thread.Sleep(1000);
+
              var result= _productServic.GetAll();
 
             if (result.Success)
@@ -56,6 +60,18 @@ namespace WebAPI.Controllers
         public IActionResult GetById(int id)
         {
             var result = _productServic.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbycategory")]
+        public IActionResult GetByCategory(int id)
+        {
+            var result = _productServic.GetAllByCategoryId(id);
             if (result.Success)
             {
                 return Ok(result);
