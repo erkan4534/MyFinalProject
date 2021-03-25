@@ -69,9 +69,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbycategory")]
-        public IActionResult GetByCategory(int id)
+        public IActionResult GetByCategory(int categoryId)
         {
-            var result = _productServic.GetAllByCategoryId(id);
+            var result = _productServic.GetAllByCategoryId(categoryId);
             if (result.Success)
             {
                 return Ok(result);
